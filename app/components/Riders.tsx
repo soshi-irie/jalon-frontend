@@ -135,7 +135,6 @@ export default function Riders({
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
                       +{(passenger.detourDistanceMeters! / 1000).toFixed(1)} km
-                      ·{` ${passenger.detour} min`}
                     </Typography>
                   </Box>
                 </Stack>

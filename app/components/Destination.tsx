@@ -14,6 +14,7 @@ import {
   APIProvider,
   AdvancedMarker,
   Map,
+  useMap,
   useMapsLibrary,
 } from "@vis.gl/react-google-maps";
 import { useEffect, useRef, useState } from "react";
@@ -48,6 +49,33 @@ type SelectedPlace = {
   label: string;
   location: google.maps.LatLngLiteral;
 };
+
+function FitTripBounds({
+  origin,
+  destination,
+}: {
+  origin: SelectedPlace | null;
+  destination: SelectedPlace | null;
+}) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map || !origin) return;
+
+    if (!destination) {
+      map.panTo(origin.location);
+      map.setZoom(13);
+      return;
+    }
+
+    const bounds = new google.maps.LatLngBounds();
+    bounds.extend(origin.location);
+    bounds.extend(destination.location);
+    map.fitBounds(bounds, 64);
+  }, [destination, map, origin]);
+
+  return null;
+}
 
 function distanceFromDirectSegmentMeters(
   point: google.maps.LatLngLiteral,
@@ -363,7 +391,7 @@ function DestinationContent({
       <div style={{ width: "100%", aspectRatio: "1 / 1" }}>
         <Map
           mapId={process.env.NEXT_PUBLIC_GOOGLE_MAP_ID ?? "DEMO_MAP_ID"}
-          center={{
+          defaultCenter={{
             lat: pos?.coords.latitude ?? -34.6037,
             lng: pos?.coords.longitude ?? -58.3816,
           }}
@@ -375,6 +403,7 @@ function DestinationContent({
             aspectRatio: "1 / 1",
           }}
         >
+          <FitTripBounds origin={origin} destination={destination} />
           {origin && (
             <AdvancedMarker position={origin.location} title={origin.label} />
           )}

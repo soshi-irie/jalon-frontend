@@ -35,7 +35,7 @@ export default function Destination({
     <APIProvider
       apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
       libraries={["places"]}
-      language="es-AR"
+      language="es"
       region="AR"
     >
       <DestinationContent
@@ -137,7 +137,7 @@ function PlaceAutocompleteField({
           await places.AutocompleteSuggestion.fetchAutocompleteSuggestions({
             input: inputValue.trim(),
             sessionToken: sessionToken.current,
-            language: "es-AR",
+            language: "es",
             region: "AR",
           });
 
@@ -245,16 +245,16 @@ function DestinationContent({
       (error) => {
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            console.error("User denined the request for Geolocation");
+            console.error("El usuario rechazó el acceso a su ubicación.");
             break;
           case error.POSITION_UNAVAILABLE:
-            console.error("Location information is unavailable");
+            console.error("La ubicación no está disponible.");
             break;
           case error.TIMEOUT:
-            console.error("The request to get user location timed out.");
+            console.error("Se agotó el tiempo para obtener la ubicación.");
             break;
           default:
-            console.error("An unknown error occured.");
+            console.error("Ocurrió un error desconocido al obtener la ubicación.");
             break;
         }
       },
@@ -421,41 +421,6 @@ function DestinationContent({
         </Map>
       </div>
 
-      {/* <Box aria-live="polite" sx={{ py: 2.5 }}>
-          <Typography variant="overline" color="text.secondary">
-            {selectedPassenger ? "Shared route" : "Your route"}
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{ mt: 0.5, overflowWrap: "anywhere" }}
-          >
-            {origin?.label.trim() || "Choose an origin"}
-            {selectedPassenger &&
-              ` → ${selectedPassenger.pickup} → ${selectedPassenger.destination}`}
-            {(!selectedPassenger ||
-              selectedPassenger.destination !== destination?.label.trim()) &&
-              ` → ${destination?.label.trim() || "Choose a destination"}`}
-          </Typography>
-          {selectedPassenger && (
-            <Stack
-              direction="row"
-              spacing={2}
-              sx={{
-                alignItems: "center",
-                justifyContent: "space-between",
-                mt: 1.5,
-              }}
-            >
-              <Typography variant="body2" color="primary.main">
-                Pick up {selectedPassenger.name} · +{selectedPassenger.detour}{" "}
-                min · ${selectedPassenger.fee} contribution
-              </Typography>
-              <Button size="small" onClick={() => setSelectedId(null)}>
-                Clear
-              </Button>
-            </Stack>
-          )}
-        </Box> */}
     </Box>
   );
 }

@@ -37,20 +37,20 @@ export default function Riders({
         }}
       >
         <Typography id="passengers-heading" component="h2" variant="h5">
-          These people add less than 10km to your travel...
+          Pasajeros con menos de 10 km de desvío
         </Typography>
       </Stack>
 
       {passengers.length === 0 ? (
         <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
           {hasSearched
-            ? "No passengers found for your trip."
-            : "Find a route to see passengers within a 10 km detour."}
+            ? "No encontramos pasajeros para este viaje."
+            : "Buscá una ruta para ver pasajeros con menos de 10 km de desvío."}
         </Typography>
       ) : (
         <Stack spacing={2}>
           <Typography variant="h6" color="text.secondary">
-            {passengers.length} matches
+            {passengers.length} {passengers.length === 1 ? "pasajero" : "pasajeros"}
           </Typography>
           {passengers.map((passenger, index) => {
             const isSelected = passenger.id === selectedId;
@@ -59,7 +59,7 @@ export default function Riders({
               <ButtonBase
                 key={passenger.id}
                 aria-pressed={isSelected}
-                aria-label={`${isSelected ? "Deselect" : "Select"} ${passenger.name}, pickup at ${passenger.pickup.label}, destination ${passenger.destination.label}, ${passenger.detour} minute detour, $${passenger.fee} contribution`}
+                aria-label={`${isSelected ? "Dejar de seleccionar" : "Seleccionar"} a ${passenger.name}, punto de encuentro: ${passenger.pickup.label}, destino: ${passenger.destination.label}, ${passenger.detour} minutos de desvío, aporte de $ ${passenger.fee}`}
                 onClick={() => setSelectedId(isSelected ? null : passenger.id)}
                 sx={{
                   width: "100%",
@@ -107,7 +107,7 @@ export default function Riders({
                       </Typography>
                       {index === 0 && (
                         <Chip
-                          label="Closest match"
+                          label="Menor desvío"
                           size="small"
                           sx={{
                             height: 22,
@@ -118,7 +118,7 @@ export default function Riders({
                       )}
                       {isSelected && (
                         <Typography variant="caption" color="primary.main">
-                          Selected
+                          Seleccionado
                         </Typography>
                       )}
                     </Stack>
@@ -126,12 +126,12 @@ export default function Riders({
                       {passenger.pickup.label}
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
-                      To {passenger.destination.label}
+                      Hasta {passenger.destination.label}
                     </Typography>
                   </Box>
                   <Box sx={{ textAlign: "right", flexShrink: 0 }}>
                     <Typography variant="subtitle2">
-                      ${passenger.fee}
+                      $ {passenger.fee}
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
                       +{(passenger.detourDistanceMeters! / 1000).toFixed(1)} km

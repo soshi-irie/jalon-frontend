@@ -12,7 +12,7 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Typography variant="caption" color="text.secondary">
-          © 2026 JALÓN. All rights reserved.
+          © 2026 JALÓN. Todos los derechos reservados.
         </Typography>
       </Container>
     </Box>

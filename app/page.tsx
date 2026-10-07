@@ -15,7 +15,7 @@ const originalPassengers: passenger[] = [
       location: { lat: -34.675, lng: -58.4654 },
     },
     destination: {
-      label: "Aeropuerto Internacional Ezeiza",
+      label: "Aeropuerto Internacional de Ezeiza",
       location: { lat: -34.8222, lng: -58.5358 },
     },
     detour: 4,
@@ -27,7 +27,7 @@ const originalPassengers: passenger[] = [
     name: "Marcus",
     initials: "MR",
     pickup: {
-      label: "Estación Liniers",
+      label: "Estación de Liniers",
       location: { lat: -34.6559, lng: -58.5158 },
     },
     destination: {
@@ -47,7 +47,7 @@ const originalPassengers: passenger[] = [
       location: { lat: -34.6461, lng: -58.4757 },
     },
     destination: {
-      label: "Estación Ezeiza",
+      label: "Estación de Ezeiza",
       location: { lat: -34.8538, lng: -58.5229 },
     },
     detour: 9,
@@ -84,7 +84,7 @@ const corridorPassengers: passenger[] = [
     name: "Laura",
     initials: "LA",
     pickup: {
-      label: "Plaza San Martin",
+      label: "Plaza San Martín",
       location: { lat: -34.5953, lng: -58.3778 },
     },
     destination: aeroparque,
@@ -97,7 +97,7 @@ const corridorPassengers: passenger[] = [
     name: "Mateo",
     initials: "MA",
     pickup: {
-      label: "Retiro Station",
+      label: "Estación Retiro",
       location: { lat: -34.5914, lng: -58.3747 },
     },
     destination: aeroparque,
@@ -123,7 +123,7 @@ const corridorPassengers: passenger[] = [
     name: "Tomas",
     initials: "TO",
     pickup: {
-      label: "Recoleta Cemetery",
+      label: "Cementerio de la Recoleta",
       location: { lat: -34.5888, lng: -58.3934 },
     },
     destination: aeroparque,
@@ -175,7 +175,7 @@ const corridorPassengers: passenger[] = [
     name: "Joaquin",
     initials: "JO",
     pickup: {
-      label: "Jardin Japones",
+      label: "Jardín Japonés",
       location: { lat: -34.5745, lng: -58.4111 },
     },
     destination: aeroparque,
@@ -212,15 +212,15 @@ const corridorPassengers: passenger[] = [
 ];
 
 const farPickupAreas = [
-  { label: "Moron", location: { lat: -34.653, lng: -58.619 } },
+  { label: "Morón", location: { lat: -34.653, lng: -58.619 } },
   { label: "Tigre", location: { lat: -34.426, lng: -58.579 } },
   { label: "Quilmes", location: { lat: -34.72, lng: -58.27 } },
   { label: "La Plata", location: { lat: -34.921, lng: -57.954 } },
-  { label: "Lujan", location: { lat: -34.57, lng: -59.1 } },
+  { label: "Luján", location: { lat: -34.57, lng: -59.1 } },
   { label: "Merlo", location: { lat: -34.666, lng: -58.729 } },
   { label: "Berazategui", location: { lat: -34.765, lng: -58.205 } },
   { label: "San Miguel", location: { lat: -34.543, lng: -58.712 } },
-  { label: "Canuelas", location: { lat: -35.05, lng: -58.76 } },
+  { label: "Cañuelas", location: { lat: -35.05, lng: -58.76 } },
 ];
 
 const distantPassengers: passenger[] = Array.from(
@@ -231,10 +231,10 @@ const distantPassengers: passenger[] = Array.from(
 
     return {
       id: `distant-passenger-${index + 1}`,
-      name: `Passenger ${String(index + 4).padStart(3, "0")}`,
+      name: `Pasajero ${String(index + 4).padStart(3, "0")}`,
       initials: `P${String(index + 1).slice(-1)}`,
       pickup: {
-        label: `${area.label} - sample pickup ${variation + 1}`,
+        label: `${area.label} - punto de encuentro de muestra ${variation + 1}`,
         location: {
           lat: area.location.lat + variation * 0.0004,
           lng: area.location.lng + variation * 0.0004,

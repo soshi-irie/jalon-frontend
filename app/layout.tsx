@@ -8,14 +8,14 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
-  title: "JALÓN | Share the way",
+  title: "JALÓN | Compartí el viaje",
   description:
-    "Find people heading your way and share a ride with a small detour.",
+    "Encontrá personas que van hacia el mismo lugar y compartí el viaje.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    <html lang="es-AR">
       <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>

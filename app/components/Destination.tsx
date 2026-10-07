@@ -35,6 +35,8 @@ export default function Destination({
     <APIProvider
       apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
       libraries={["places"]}
+      language="es-AR"
+      region="AR"
     >
       <DestinationContent
         passengers={passengers}
@@ -135,6 +137,8 @@ function PlaceAutocompleteField({
           await places.AutocompleteSuggestion.fetchAutocompleteSuggestions({
             input: inputValue.trim(),
             sessionToken: sessionToken.current,
+            language: "es-AR",
+            region: "AR",
           });
 
         if (isCurrentRequest) {
@@ -188,8 +192,8 @@ function PlaceAutocompleteField({
       getOptionKey={(option) => option.placeId}
       noOptionsText={
         inputValue.trim().length < 3
-          ? "Type at least 3 characters"
-          : "No places found"
+          ? "Escribí al menos 3 caracteres"
+          : "No encontramos lugares"
       }
       onInputChange={(_, value, reason) => {
         if (reason !== "input" && reason !== "clear") return;
@@ -229,9 +233,9 @@ function DestinationContent({
     navigator.geolocation.getCurrentPosition(
       (location: GeolocationPosition) => {
         setPos(location);
-        setOriginLabel("Current Location");
+        setOriginLabel("Ubicación actual");
         setOrigin({
-          label: "Current Location",
+          label: "Ubicación actual",
           location: {
             lat: location.coords.latitude,
             lng: location.coords.longitude,
@@ -265,7 +269,7 @@ function DestinationContent({
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!origin || !destination) {
-      setErrorMessage("Choose a suggested place for both locations.");
+      setErrorMessage("Elegí un lugar de las sugerencias para cada ubicación.");
       return;
     }
 
@@ -327,7 +331,7 @@ function DestinationContent({
       );
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "Could not find a route.",
+        error instanceof Error ? error.message : "No se pudo encontrar una ruta.",
       );
     } finally {
       setIsLoading(false);
@@ -346,21 +350,21 @@ function DestinationContent({
         }}
       >
         <Typography component="h2" variant="h5">
-          Enter your destination to find riders
+          Ingresá tu viaje para encontrar pasajeros
         </Typography>
       </Stack>
 
       <Box component="form" onSubmit={handleSubmit}>
         <Stack direction="row" spacing={2} sx={{ mb: 2.5 }}>
           <PlaceAutocompleteField
-            label="From"
+            label="Desde"
             inputValue={originLabel}
             selectedPlace={origin}
             onInputValueChange={setOriginLabel}
             onPlaceSelect={setOrigin}
           />
           <PlaceAutocompleteField
-            label="To"
+            label="Hasta"
             inputValue={destinationLabel}
             selectedPlace={destination}
             onInputValueChange={setDestinationLabel}
@@ -373,7 +377,7 @@ function DestinationContent({
           disabled={isLoading || !origin || !destination}
           sx={{ mb: 2.5 }}
         >
-          {isLoading ? "Finding route…" : "Find route"}
+          {isLoading ? "Buscando ruta…" : "Buscar pasajeros"}
         </Button>
       </Box>
 
@@ -384,7 +388,7 @@ function DestinationContent({
           sx={{ mb: 2 }}
         >
           {errorMessage ??
-            `Route found · ${(route!.distanceMeters / 1000).toFixed(1)} km · ${Math.ceil(Number.parseFloat(route!.duration) / 60)} min`}
+            `Ruta encontrada · ${(route!.distanceMeters / 1000).toFixed(1)} km · ${Math.ceil(Number.parseFloat(route!.duration) / 60)} min`}
         </Typography>
       )}
 
